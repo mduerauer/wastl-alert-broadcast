@@ -1,8 +1,8 @@
 # The libraries to build
-noinst_LIBRARIES = libwab.a
-noinst_HEADERS = libwab.h
+lib_LTLIBRARIES = libwab.la
 
 # The files to add to the library and to the source distribution
-libwab_a_SOURCES = \
-                         $(libwab_a_HEADERS) \
-                         libwab.c
+libwab_la_SOURCES = \
+                    libwab.c
+
+include_HEADERS = libwab.h

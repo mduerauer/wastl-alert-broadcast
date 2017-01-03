@@ -6,6 +6,7 @@ AC_INIT([wastl-alert-broadcast], [1.0], [markus.duerauer@feuerwehr.gv.at])
 AC_CONFIG_SRCDIR([src/bin/client.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
+LT_INIT
 
 # Checks for programs.
 AC_PROG_CC
