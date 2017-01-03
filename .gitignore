@@ -38,3 +38,4 @@ ltmain.sh
 # binaries
 src/bin/wabclient
 src/bin/wabserver
+src/lib/.libs
