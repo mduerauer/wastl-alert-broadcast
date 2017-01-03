@@ -31,6 +31,9 @@ stamp-h1
 *.lo
 *.gcno
 *.gcda
+config.guess
+config.sub
+ltmain.sh
 
 # binaries
 src/bin/wabclient
