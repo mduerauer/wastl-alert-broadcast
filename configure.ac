@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(wastl-alert-broadcast, 1.0, markus.duerauer@feuerwehr.gv.at)
+AC_INIT([wastl-alert-broadcast], [1.0], [markus.duerauer@feuerwehr.gv.at])
 AC_CONFIG_SRCDIR([src/bin/client.c])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
@@ -10,6 +10,7 @@ AM_INIT_AUTOMAKE
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_CPP
+AC_PROG_RANLIB
 
 # Use the C language and compiler for the following checks
 AC_LANG([C])
@@ -26,5 +27,6 @@ AC_TYPE_SIZE_T
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile
+                 src/lib/Makefile
                  src/bin/Makefile])
 AC_OUTPUT
