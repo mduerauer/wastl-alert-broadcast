@@ -11,6 +11,7 @@
 
 static 	int	broadcastSock = -1;
 static	int	udpPort = 8888;
+static	int	loop = 1;
 
 int main(int argc, char* argv[]) {
 	int rv = 0;
@@ -24,13 +25,19 @@ int main(int argc, char* argv[]) {
 	}
 	shutdown(broadcastSock, SHUT_RD);
 
-	broadcast("Hello Server!");
+	while(loop) {
+		broadcast("keepalive");
+		sleep(1);
+	}
 	return rv;
 }
 
 static void broadcast(const char *msg) {
 	struct sockaddr_in s;
 	int on;
+
+	if(broadcastSock < 1)
+		return;
 
 	memset(&s, '\0', sizeof(struct sockaddr_in));
 	s.sin_family = AF_INET;
