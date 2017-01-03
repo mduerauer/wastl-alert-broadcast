@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#include "wab.h"
 #include "client.h"
 
 int main(int argc, char* argv[]) {

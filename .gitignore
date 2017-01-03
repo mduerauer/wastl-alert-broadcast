@@ -31,3 +31,7 @@ stamp-h1
 *.lo
 *.gcno
 *.gcda
+
+# binaries
+src/bin/wabclient
+src/bin/wabserver
