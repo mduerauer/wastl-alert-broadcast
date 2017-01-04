@@ -13,34 +13,45 @@ static  int     udpPort = 8888;
 static 	char*	server = "192.168.122.20";
 
 int main(int argc, char* argv[]) {
-	int rv = 0;
-	struct sockaddr_in si_other;
-	int s, i, slen=sizeof(si_other);
-	char buf[BUFLEN];
-	char message[BUFLEN];
+    int rv = 0;
+    struct sockaddr_in my_addr;
+    struct sockaddr_in their_addr;
+    socklen_t addr_len;
+    int s, i;
+    char buf[BUFLEN];
+    char message[BUFLEN];
+    int numbytes;
 
-	if ( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
-		return 1;
-	}
+    if ( (s=socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
+        return 1;
+    }
 
-	memset((char *) &si_other, 0, sizeof(si_other));
-	si_other.sin_family = AF_INET;
-	si_other.sin_port = htons(udpPort);
+    memset((char *) &my_addr, 0, sizeof(my_addr));
+    my_addr.sin_family = AF_INET;
+    my_addr.sin_port = htons(udpPort);
+    my_addr.sin_addr.s_addr = INADDR_ANY;
 
-	if (inet_aton(server, &si_other.sin_addr) == 0) 
-	{
-		fprintf(stderr, "inet_aton() failed\n");
-		exit(1);
-	}
+    if (bind(s, (struct sockaddr *)&my_addr,
+        sizeof(struct sockaddr)) == -1) {
+        perror("bind");
+        exit(1);
+    }
 
-	while(1) {
-		memset(buf,'\0', BUFLEN);
-		if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen) == -1) {
-			return 1;
-		}
+    addr_len = sizeof(struct sockaddr);
+    
+    while(1) {
+        memset(buf,'\0', BUFLEN);
+        if ((numbytes = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &their_addr, &addr_len)) == -1) {
+            return 1;
+        }
+    
+        printf("got packet from %s\n",inet_ntoa(their_addr.sin_addr));
+        printf("packet is %d bytes long\n",numbytes);
+        buf[numbytes] = '\0';
+        printf("packet contains \"%s\"\n",buf);
+    }
 
-		printf("%s", buf);
-	}
+    close(s);
 
-	return rv;
+    return rv;
 }
