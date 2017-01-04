@@ -1,1 +1,6 @@
-#define	TEST	123
+#ifndef client_h
+#define client_h
+
+/* Insert definitions here */
+
+#endif

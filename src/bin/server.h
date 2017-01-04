@@ -1,4 +1,10 @@
-#define	TEST	123
-#define EX_UNAVAILABLE	1
+#ifndef server_h
+#define server_h
 
-static void broadcast(const char *msg);
+#define EX_UNAVAILABLE  1
+
+static void broadcast(const struct wab_alert_msg *msg);
+static void bc_keepalive();
+static void bc_testalert();
+
+#endif

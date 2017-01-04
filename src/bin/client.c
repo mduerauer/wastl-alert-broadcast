@@ -7,8 +7,6 @@
 #include "wab.h"
 #include "client.h"
 
-#define	BUFLEN 512
-
 static  int     udpPort = 8888;
 static 	char*	server = "192.168.122.20";
 
@@ -20,7 +18,9 @@ int main(int argc, char* argv[]) {
     int s, i;
     char buf[BUFLEN];
     char message[BUFLEN];
+    wab_alert_msg msg;
     int numbytes;
+
 
     if ( (s=socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
         return 1;
@@ -44,11 +44,17 @@ int main(int argc, char* argv[]) {
         if ((numbytes = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &their_addr, &addr_len)) == -1) {
             return 1;
         }
+
+        memcpy(&msg, buf, sizeof(struct wab_alert_msg));
     
-        printf("got packet from %s\n",inet_ntoa(their_addr.sin_addr));
-        printf("packet is %d bytes long\n",numbytes);
-        buf[numbytes] = '\0';
-        printf("packet contains \"%s\"\n",buf);
+        printf("Got packet from %s\n",inet_ntoa(their_addr.sin_addr));
+        printf("Packet is %d bytes long\n",numbytes);
+        printf("Timestamp is %d\n", msg.ts);
+        printf("RIC is %d\n", msg.ric);
+        printf("SUBRIC is %d\n", msg.subric);
+        printf("Type is %d\n", msg.msgtype);
+        printf("Text is %s\n", msg.text);
+        printf("-----------------------------------------\n");
     }
 
     close(s);
