@@ -28,6 +28,7 @@ AC_CHECK_HEADERS([stdio.h])
 AC_TYPE_SIZE_T
 
 # Checks for library functions.
+AC_CHECK_LIB(pthread, pthread_create, [PTHREAD_LIBS+=-lpthread])
 
 AC_CONFIG_FILES([Makefile
                  src/lib/Makefile

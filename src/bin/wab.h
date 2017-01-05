@@ -1,11 +1,16 @@
 #ifndef wab_h
 #define wab_h
 
-#define BUFLEN  255
+#define BUFLEN  1024
 
 #define WAB_MSG_KEEPALIVE   1
 #define WAB_MSG_ALERT       2
-#define WAB_MSG_TEXT_LEN    128
+#define WAB_MSG_TEXT_LEN    256
+
+#define SUBRIC_A    0
+#define SUBRIC_B    1
+#define SUBRIC_C    2
+#define SUBRIC_D    3
 
 typedef struct wab_alert_msg
 {
