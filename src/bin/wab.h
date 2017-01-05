@@ -12,6 +12,8 @@
 #define SUBRIC_C    2
 #define SUBRIC_D    3
 
+#define DEFAULT_PORT 8888
+
 typedef struct wab_alert_msg
 {
     int     ts;
